@@ -20,27 +20,36 @@ jobs:
 
     steps:
     - uses: actions/checkout@v3
-    - name: Use Node.js ${{ matrix.node-version }}
+    
+    - name: Using Node ${{ matrix.node-version }}
       uses: actions/setup-node@v3
       with:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
         
-    - name: Install dependencies
+    - name: Retrieving build cache
+      uses: actions/cache@v2
+      with:
+        path: |
+          node_modules
+          */*/node_modules
+        key: ${{ runner.os }}-${{ hashFiles('**/yarn.lock') }}
+        
+    - name: Installing dependencies
     - run: npm ci
     
-    - name: Generate coverage report
+    - name: Generating coverage report
     - run: npm test
     
-    - name: Upload coverage report
+    - name: Uploading coverage report
       uses: codecov/codecov-action@v3
       with:
         token: ${{ secrets.CODECOV_TOKEN }}
     
-    - name: Build files
+    - name: Building
     - run: npm run build --if-present
     
-    - name: Deploy
+    - name: Deploying
       run: |
         git config --global user.name $user_name
         git config --global user.email $user_email
