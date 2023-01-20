@@ -33,16 +33,16 @@ jobs:
           */*/node_modules
         key: ${{ runner.os }}-${{ hashFiles('**/yarn.lock') }}
     - name: Installing dependencies
-    - run: npm ci
+      run: npm ci
     - name: Generating coverage report
-    - run: npm test
+      run: npm test
     - name: Uploading coverage report
       uses: codecov/codecov-action@v3
       with:
         token: ${{ secrets.CODECOV_TOKEN }}
     
     - name: Building
-    - run: npm run build --if-present
+      run: npm run build --if-present
     
     - name: Deploying
       run: |
