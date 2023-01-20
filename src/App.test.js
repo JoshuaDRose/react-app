@@ -3,6 +3,6 @@ import App from './App';
 
 test('renders todo list', () => {
   render(<App />);
-  const linkElement = screen.getByText(/Todo/i);
-  expect(linkElement).toBeInTheDocument();
+  const listElement = screen.getByText(/My List/i);
+  expect(listElement).toBeInTheDocument();
 });
