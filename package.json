@@ -3,6 +3,10 @@
   "version": "0.1.0",
   "private": false,
   "homepage": "https://JoshuaDRose.github.io/react-app",
+  "repository": {
+      "type": "git",
+      "url": "git@github.com:JoshuaDRose/react-app.git"
+  },
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
