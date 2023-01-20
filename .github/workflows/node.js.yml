@@ -20,13 +20,11 @@ jobs:
 
     steps:
     - uses: actions/checkout@v3
-    
     - name: Using Node ${{ matrix.node-version }}
       uses: actions/setup-node@v3
       with:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
-        
     - name: Retrieving build cache
       uses: actions/cache@v2
       with:
@@ -34,13 +32,10 @@ jobs:
           node_modules
           */*/node_modules
         key: ${{ runner.os }}-${{ hashFiles('**/yarn.lock') }}
-        
     - name: Installing dependencies
     - run: npm ci
-    
     - name: Generating coverage report
     - run: npm test
-    
     - name: Uploading coverage report
       uses: codecov/codecov-action@v3
       with:
